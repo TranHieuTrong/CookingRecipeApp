@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import ChangeInfo from './ChangeInfo'; // Import ChangeInfo component
 
 const Screen4 = () => {
   const navigation = useNavigation();
