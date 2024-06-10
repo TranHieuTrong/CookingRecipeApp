@@ -19,25 +19,21 @@ const Login = ({navigation}) => {
   const [userId, setUserId] = useState(''); // Thêm state để lưu _id của người dùng
 
   const next = async () => {
-    // Kiểm tra trường trống
     if (!email || !password) {
       Alert.alert('Vui lòng điền đầy đủ thông tin.');
       return;
     }
 
-    // Kiểm tra định dạng email
     if (!isValidEmail(email)) {
       Alert.alert('Email không hợp lệ.');
       return;
     }
 
-    // Kiểm tra mật khẩu đủ mạnh
     if (password.length < 6) {
       Alert.alert('Mật khẩu quá ngắn. Hãy sử dụng ít nhất 6 ký tự.');
       return;
     }
 
-    // Gửi yêu cầu đăng nhập tới API
     try {
       console.log('Sending request to API');
       const response = await axios.post('http://192.168.56.1:9999/user/login', {
@@ -54,7 +50,6 @@ const Login = ({navigation}) => {
         await AsyncStorage.setItem('userId', response.data.user._id);
         await AsyncStorage.setItem('userName', response.data.user.name);
 
-        // Kiểm tra nếu có thông tin phone và image trả về từ máy chủ
         if (response.data.user.phone) {
           await AsyncStorage.setItem('userPhone', response.data.user.phone);
         }
@@ -68,12 +63,11 @@ const Login = ({navigation}) => {
         Alert.alert('Đăng nhập thất bại. Vui lòng thử lại.');
       }
     } catch (error) {
-      console.error('Error occurred:', error); // In ra error để xem nguyên nhân cụ thể
+      console.error('Error occurred:', error);
       Alert.alert('Đã có lỗi xảy ra. Vui lòng thử lại sau.');
     }
   };
 
-  // Hàm kiểm tra định dạng email
   const isValidEmail = email => {
     return /\S+@\S+\.\S+/.test(email);
   };
