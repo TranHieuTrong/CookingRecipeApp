@@ -4,7 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {Image, StyleSheet} from 'react-native';
 import SavedRecipes from '../screens/SavedRecipes';
 import DetailsRecipes from '../screens/DetailsRecipes';
-import Screen1 from '../screens/HomeScreen';
+import Screen1 from '../screens/Screen1';
 import Screen2 from '../screens/AddProduct';
 import Screen3 from '../screens/Notifications';
 import Screen4 from '../screens/Profile';
