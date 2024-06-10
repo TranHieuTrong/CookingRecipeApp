@@ -105,7 +105,7 @@ const Screen1 = () => {
     <View style={myStyles.container}>
       <View style={myStyles.viewHeader}>
         <View>
-          <Text style={myStyles.txtHello}>Hello Jega</Text>
+          <Text style={myStyles.txtHello}>Hello Bro</Text>
           <Text style={myStyles.txtContent}>What are you cooking today?</Text>
         </View>
         <TouchableOpacity>
