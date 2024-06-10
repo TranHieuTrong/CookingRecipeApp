@@ -5,7 +5,7 @@ import {Image, StyleSheet} from 'react-native';
 import SavedRecipes from '../screens/SavedRecipes';
 import DetailsRecipes from '../screens/DetailsRecipes';
 import Screen1 from '../screens/HomeScreen';
-import Screen2 from '../screens/Screen2';
+import Screen2 from '../screens/AddProduct';
 import Screen3 from '../screens/Notifications';
 import Screen4 from '../screens/Profile';
 import Filter from '../screens/Filter';
