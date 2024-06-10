@@ -9,7 +9,7 @@ import {
   onPress,
   Alert,
 } from 'react-native';
-import Screen1 from './Screen1';
+import Screen1 from './HomeScreen';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
