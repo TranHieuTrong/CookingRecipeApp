@@ -14,9 +14,8 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({navigation}) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [userId, setUserId] = useState(''); // Thêm state để lưu _id của người dùng
+  const [email, setEmail] = useState('hchong@gmail.com');
+  const [password, setPassword] = useState('Trong1507@');
   const [error, setError] = useState('');
 
   const next = async () => {
