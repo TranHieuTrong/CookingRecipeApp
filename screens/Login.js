@@ -34,18 +34,14 @@ const Login = ({navigation}) => {
     }
 
     try {
-      console.log('Sending request to API');
       const response = await axios.post('http://192.168.56.1:9999/user/login', {
         email,
         password,
       });
 
-      console.log('Response from API:', response.data);
-      if (
-        response.data.message === 'Đăng nhập thành công' &&
-        response.data.user._id &&
-        response.data.user.name
-      ) {
+      if (response.status === 200) {
+        console.log('Đăng nhập thành công:', response.data);
+
         await AsyncStorage.setItem('userId', response.data.user._id);
         await AsyncStorage.setItem('userName', response.data.user.name);
 
@@ -55,15 +51,11 @@ const Login = ({navigation}) => {
         if (response.data.user.image) {
           await AsyncStorage.setItem('userImage', response.data.user.image);
         }
-
-        setUserId(response.data.user._id);
         navigation.navigate('Navigation');
-      } else {
-        Alert.alert('Đăng nhập thất bại. Vui lòng thử lại.');
       }
     } catch (error) {
-      console.error('Error occurred:', error);
-      Alert.alert('Đã có lỗi xảy ra. Vui lòng thử lại sau.');
+      console.log('Đổi mật khẩu');
+      Alert.alert('Đổi mật khẩu');
     }
   };
 
