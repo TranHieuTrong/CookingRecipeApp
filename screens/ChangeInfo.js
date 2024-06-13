@@ -38,12 +38,29 @@ const ChangeInfo = () => {
 
     fetchData();
   }, []);
+  const validatePassword = password => {
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const isValidLength = password.length >= 6;
 
+    return hasUpperCase && hasSpecialChar && isValidLength;
+  };
   const handleSave = async () => {
     try {
       const data = {};
       if (name !== '') data.name = name;
-      if (password !== '') data.password = password;
+
+      if (password !== '') {
+        if (validatePassword(password)) {
+          data.password = password;
+        } else {
+          Alert.alert(
+            'Mật khẩu phải có ít nhất 1 chữ cái viết hoa, ít nhất 6 kí tự, và ít nhất 1 kí tự đặc biệt.',
+          );
+          return;
+        }
+      }
+
       if (image !== '') data.image = image;
       if (phone !== '') data.phone = phone;
 
@@ -56,10 +73,8 @@ const ChangeInfo = () => {
         response.status === 200 &&
         response.data.message === 'Cập nhật thông tin thành công'
       ) {
-        // Nếu cập nhật thành công, hiển thị thông báo cho người dùng
         Alert.alert('Thông tin đã được cập nhật.');
       } else {
-        // Nếu không thành công, hiển thị thông báo lỗi cho người dùng
         Alert.alert('Cập nhật thông tin thành công.');
       }
     } catch (error) {
@@ -68,7 +83,7 @@ const ChangeInfo = () => {
         error.response.data &&
         error.response.data.message
       ) {
-        console.error('Error message:', error);
+        console.error('Error message:', error.response.data.message);
       }
       Alert.alert('Đã có lỗi xảy ra. Vui lòng thử lại sau.');
     }
