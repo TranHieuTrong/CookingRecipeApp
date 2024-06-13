@@ -35,39 +35,6 @@ const Login = ({navigation}) => {
       return;
     }
 
-    // try {
-    //   console.log('Sending request to API');
-    //   const response = await axios.post('http://192.168.56.1:9999/user/login', {
-    //     email,
-    //     password,
-    //   });
-
-    //   console.log('Response from API:', response.data);
-    //   if (
-    //     response.data.message === 'Đăng nhập thành công' &&
-    //     response.data.user._id &&
-    //     response.data.user.name
-    //   ) {
-    //     await AsyncStorage.setItem('userId', response.data.user._id);
-    //     await AsyncStorage.setItem('userName', response.data.user.name);
-
-    //     if (response.data.user.phone) {
-    //       await AsyncStorage.setItem('userPhone', response.data.user.phone);
-    //     }
-    //     if (response.data.user.image) {
-    //       await AsyncStorage.setItem('userImage', response.data.user.image);
-    //     }
-
-    //     setUserId(response.data.user._id);
-    //     navigation.navigate('Navigation');
-    //   } else {
-    //     Alert.alert('Đăng nhập thất bại. Vui lòng thử lại.');
-    //   }
-    // } catch (error) {
-    //   console.error('Error occurred:', error);
-    //   Alert.alert('Đã có lỗi xảy ra. Vui lòng thử lại sau.');
-    // }
-
     try {
       const response = await axios.post('http://192.168.56.1:9999/user/login', {
         email,
@@ -77,7 +44,6 @@ const Login = ({navigation}) => {
       if (response.status === 200) {
         console.log('Đăng nhập thành công:', response.data);
 
-        // Lưu thông tin người dùng vào AsyncStorage
         await AsyncStorage.setItem('userId', response.data.user._id);
         await AsyncStorage.setItem('userName', response.data.user.name);
 
@@ -88,7 +54,6 @@ const Login = ({navigation}) => {
           await AsyncStorage.setItem('userImage', response.data.user.image);
         }
 
-        // Điều hướng đến trang khác (ví dụ: trang chủ)
         navigation.navigate('Navigation');
       }
     } catch (error) {
