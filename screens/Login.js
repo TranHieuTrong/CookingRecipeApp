@@ -14,9 +14,10 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({navigation}) => {
-  const [email, setEmail] = useState('hchong@gmail.com');
-  const [password, setPassword] = useState('Trong1507');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [userId, setUserId] = useState(''); // Thêm state để lưu _id của người dùng
+  const [error, setError] = useState('');
 
   const next = async () => {
     if (!email || !password) {
@@ -34,19 +35,49 @@ const Login = ({navigation}) => {
       return;
     }
 
+    // try {
+    //   console.log('Sending request to API');
+    //   const response = await axios.post('http://192.168.56.1:9999/user/login', {
+    //     email,
+    //     password,
+    //   });
+
+    //   console.log('Response from API:', response.data);
+    //   if (
+    //     response.data.message === 'Đăng nhập thành công' &&
+    //     response.data.user._id &&
+    //     response.data.user.name
+    //   ) {
+    //     await AsyncStorage.setItem('userId', response.data.user._id);
+    //     await AsyncStorage.setItem('userName', response.data.user.name);
+
+    //     if (response.data.user.phone) {
+    //       await AsyncStorage.setItem('userPhone', response.data.user.phone);
+    //     }
+    //     if (response.data.user.image) {
+    //       await AsyncStorage.setItem('userImage', response.data.user.image);
+    //     }
+
+    //     setUserId(response.data.user._id);
+    //     navigation.navigate('Navigation');
+    //   } else {
+    //     Alert.alert('Đăng nhập thất bại. Vui lòng thử lại.');
+    //   }
+    // } catch (error) {
+    //   console.error('Error occurred:', error);
+    //   Alert.alert('Đã có lỗi xảy ra. Vui lòng thử lại sau.');
+    // }
+
     try {
-      console.log('Sending request to API');
       const response = await axios.post('http://192.168.56.1:9999/user/login', {
         email,
         password,
       });
 
-      console.log('Response from API:', response.data);
-      if (
-        response.data.message === 'Đăng nhập thành công' &&
-        response.data.user._id &&
-        response.data.user.name
-      ) {
+      if (response.status === 200) {
+        console.log('Đăng nhập thành công:', response.data);
+
+        // Lưu thông tin người dùng vào AsyncStorage
         await AsyncStorage.setItem('userId', response.data.user._id);
         await AsyncStorage.setItem('userName', response.data.user.name);
 
@@ -57,14 +88,19 @@ const Login = ({navigation}) => {
           await AsyncStorage.setItem('userImage', response.data.user.image);
         }
 
-        setUserId(response.data.user._id);
+        // Điều hướng đến trang khác (ví dụ: trang chủ)
         navigation.navigate('Navigation');
-      } else {
-        Alert.alert('Đăng nhập thất bại. Vui lòng thử lại.');
       }
     } catch (error) {
-      console.error('Error occurred:', error);
-      Alert.alert('Đã có lỗi xảy ra. Vui lòng thử lại sau.');
+      console.log('Sai mật khẩu');
+      Alert.alert('Sai mật khẩu');
+      if (error.response && error.response.status === 401) {
+        setError('Email hoặc mật khẩu không đúng.');
+      } else {
+        setError(
+          'Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin và thử lại.',
+        );
+      }
     }
   };
 
