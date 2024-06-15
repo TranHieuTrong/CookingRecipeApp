@@ -1,5 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TextInput, Button, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  Alert,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
@@ -90,60 +98,115 @@ const ChangeInfo = () => {
   };
 
   return (
-    <View style={{padding: 20}}>
-      <Text style={{fontSize: 20, marginBottom: 10}}>Change Info</Text>
-      <Text>Name: {savedName}</Text>
+    <View style={{padding: 20, backgroundColor: '#FFFFFF', flex: 1}}>
+      <Text
+        style={{
+          fontSize: 20,
+          marginTop: 50,
+          fontSize: 25,
+          color: 'black',
+          fontWeight: '700',
+          lineHeight: 30,
+          alignContent: 'center',
+          alignSelf: 'center',
+        }}>
+        Change Info
+      </Text>
+      <Text style={{fontSize: 15, marginTop: 20, color: '#FF9C00'}}>
+        Name: {savedName}
+      </Text>
       <TextInput
         style={{
-          height: 40,
+          height: 50,
+          width: '100%',
+          backgroundColor: 'white',
+          marginTop: 10,
+          padding: 15,
+          borderRadius: 10,
           borderColor: 'gray',
           borderWidth: 1,
-          marginBottom: 10,
         }}
         value={name}
         onChangeText={text => setName(text)}
         placeholder="New name"
       />
-      <Text>Password: {savedPassword}</Text>
+      <Text style={{fontSize: 15, marginTop: 20, color: '#FF9C00'}}>
+        Password: {savedPassword}
+      </Text>
       <TextInput
         style={{
-          height: 40,
+          height: 50,
+          width: '100%',
+          backgroundColor: 'white',
+          marginTop: 10,
+          padding: 15,
+          borderRadius: 10,
           borderColor: 'gray',
           borderWidth: 1,
-          marginBottom: 10,
         }}
         value={password}
         onChangeText={text => setPassword(text)}
         secureTextEntry={true}
         placeholder="New password"
       />
-      <Text>Image: {savedImage}</Text>
+      <Text style={{fontSize: 15, marginTop: 20, color: '#FF9C00'}}>
+        Image: {savedImage}
+      </Text>
       <TextInput
         style={{
-          height: 40,
+          height: 50,
+          width: '100%',
+          backgroundColor: 'white',
+          marginTop: 10,
+          padding: 15,
+          borderRadius: 10,
           borderColor: 'gray',
           borderWidth: 1,
-          marginBottom: 10,
         }}
         value={image}
         onChangeText={text => setImage(text)}
         placeholder="New image URL (Optional)"
       />
-      <Text>Phone: {savedPhone !== '' ? savedPhone : 'No phone number'}</Text>
+      <Text style={{fontSize: 15, marginTop: 20, color: '#FF9C00'}}>
+        Phone: {savedPhone !== '' ? savedPhone : 'No phone number'}
+      </Text>
       <TextInput
         style={{
-          height: 40,
+          height: 50,
+          width: '100%',
+          backgroundColor: 'white',
+          marginTop: 10,
+          padding: 15,
+          borderRadius: 10,
           borderColor: 'gray',
           borderWidth: 1,
-          marginBottom: 10,
         }}
         value={phone}
         onChangeText={text => setPhone(text)}
         placeholder="New phone number"
       />
-      <Button title="Save" onPress={handleSave} />
+      <TouchableOpacity style={styles.touch} onPress={handleSave}>
+        <Text style={styles.txtTouch}>Save</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
 export default ChangeInfo;
+
+const styles = StyleSheet.create({
+  txtTouch: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: 'white',
+  },
+  touch: {
+    width: '100%',
+    height: 60,
+    marginTop: 20,
+    backgroundColor: '#129575',
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
