@@ -36,7 +36,7 @@ const Register = () => {
     }
 
     const strongPasswordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,50}$/;
     if (!strongPasswordRegex.test(password)) {
       Alert.alert(
         'Pass gồm ít nhất 1 kí tự đặc biệt, chữ cái viết hoa, và ít nhất 6 chữ cái',
