@@ -14,8 +14,8 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({navigation}) => {
-  const [email, setEmail] = useState('trong@gmail.com');
-  const [password, setPassword] = useState('trong1507');
+  const [email, setEmail] = useState('hchong@gmail.com');
+  const [password, setPassword] = useState('Trong1507@');
   const [userId, setUserId] = useState('');
   const next = async () => {
     if (!email || !password) {
@@ -54,8 +54,8 @@ const Login = ({navigation}) => {
         navigation.navigate('Navigation');
       }
     } catch (error) {
-      console.log('Đổi mật khẩu');
-      Alert.alert('Đổi mật khẩu');
+      console.log('Sai mật khẩu');
+      Alert.alert('Sai mật khẩu');
     }
   };
 

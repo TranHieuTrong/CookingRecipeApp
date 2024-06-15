@@ -10,8 +10,11 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import {useNavigation} from '@react-navigation/native';
 
 const ChangeInfo = () => {
+  const navigation = useNavigation();
+
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [image, setImage] = useState('');
@@ -63,7 +66,7 @@ const ChangeInfo = () => {
           data.password = password;
         } else {
           Alert.alert(
-            'Mật khẩu phải có ít nhất 1 chữ cái viết hoa, ít nhất 6 kí tự, và ít nhất 1 kí tự đặc biệt.',
+            'Pass gồm ít nhất 1 kí tự đặc biệt, chữ cái viết hoa, và ít nhất 6 chữ cái',
           );
           return;
         }
@@ -81,7 +84,9 @@ const ChangeInfo = () => {
         response.status === 200 &&
         response.data.message === 'Cập nhật thông tin thành công'
       ) {
-        Alert.alert('Thông tin đã được cập nhật.');
+        Alert.alert('Thông tin đã được cập nhật.', '', [
+          {text: 'OK', onPress: () => navigation.navigate('Profile')},
+        ]);
       } else {
         Alert.alert('Cập nhật thông tin thành công.');
       }

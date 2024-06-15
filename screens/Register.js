@@ -20,35 +20,30 @@ const Register = () => {
   const [check, setCheck] = useState(false);
 
   const next = async () => {
-    // Kiểm tra trường trống
     if (!email || !password || !name || !confirm) {
       Alert.alert('Vui lòng điền đầy đủ thông tin.');
       return;
     }
 
-    // Kiểm tra định dạng email
     if (!isValidEmail(email)) {
       Alert.alert('Email không hợp lệ.');
       return;
     }
 
-    // Kiểm tra mật khẩu đủ mạnh
     if (password.length < 6) {
       Alert.alert('Mật khẩu quá ngắn. Hãy sử dụng ít nhất 6 ký tự.');
       return;
     }
 
-    // Kiểm tra mật khẩu có đủ mạnh
     const strongPasswordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
     if (!strongPasswordRegex.test(password)) {
       Alert.alert(
-        'Mật khẩu không đủ mạnh. Mật khẩu cần có ít nhất 6 ký tự, 1 chữ cái viết hoa, 1 chữ cái viết thường, 1 số và 1 ký tự đặc biệt.',
+        'Pass gồm ít nhất 1 kí tự đặc biệt, chữ cái viết hoa, và ít nhất 6 chữ cái',
       );
       return;
     }
 
-    // Kiểm tra xác nhận mật khẩu
     if (password !== confirm) {
       Alert.alert('Mật khẩu xác nhận không khớp.');
       return;
